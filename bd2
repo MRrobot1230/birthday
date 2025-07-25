@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Birthday Surprise</title>
+<style>
+  * {margin:0; padding:0; box-sizing:border-box;}
+  body, html {
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    color: white;
+  }
+  #page1, #page2 {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top:0; left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.8s ease;
+  }
+  #page2 { display: none; background-color: rgba(0,0,0,0.6); }
+  button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #ffb6c1;
+    color: #4b0d2f;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  #message {
+    max-width: 700px;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+</style>
+</head>
+<body>
+
+<div id="page1" style="background-image: url('urname.jpg');">
+  <h1 style="font-size: 3rem; text-shadow: 2px 2px 5px #c2185b;">Happy birthdayyyyy、Lovee 🌸</h1>
+  <button id="startBtn">Open Your Message</button>
+</div>
+
+<div id="page2" 
+     style="background-image: url('urname.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(0,0,0,0.6); /* overlay effect */
+            ">
+  <div id="message"></div>
+</div>
+
+
+<audio id="bgMusic" loop>
+  <source src="https://files.catbox.moe/t9u9v1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const startBtn = document.getElementById('startBtn');
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
+  const messageDiv = document.getElementById('message');
+  const music = document.getElementById('bgMusic');
+
+  const messageText = `So,
+
+Another year, another birthday and I know that you're scared that you're getting old but at least you're getting old with me right? Yet somehow I still can’t find the right words to tell you what you mean to me.
+
+We’ve been through so much together. The laughs that made my stomach hurt, the quiet moments that spoke louder than words, the nights we talked about everything and nothing. You’ve seen me at my best, but more importantly, you’ve stayed when I was at my worst. That’s not something I take lightly. That’s rare. That’s you.
+
+I don’t know what the future looks like exactly, but I know this — I want you in it. I want more adventures, more stupid inside jokes, more shared silences that somehow feel like home. Life hits hard sometimes, but with you around, it feels softer. Safer.
+
+So on your birthday, I just want to say: thank you. For being here. For being you. For making the world — my world — better just by existing in it. Happy birthday, So. I hope this year brings you peace, clarity, love — and maybe even a little bit of the magic you’ve given me.
+
+With all my heart,
+— ur Dearest Levi again`;
+
+  // Simple typing effect
+  function typeWriter(text, element, i = 0) {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      setTimeout(() => typeWriter(text, element, i + 1), 60);
+    }
+  }
+
+  startBtn.addEventListener('click', () => {
+    page1.style.display = 'none';
+    page2.style.display = 'flex';
+    typeWriter(messageText, messageDiv);
+    music.volume = 0.4;
+    music.play().catch(() => {});
+  });
+</script>
+
+</body>
+</html>
